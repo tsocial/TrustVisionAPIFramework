@@ -1,0 +1,16 @@
+PODS:
+  - TrustVisionAPIFramework (1.0.0)
+
+DEPENDENCIES:
+  - TrustVisionAPIFramework (from `../`)
+
+EXTERNAL SOURCES:
+  TrustVisionAPIFramework:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  TrustVisionAPIFramework: 8a02a6d298068dc6a5c2e918547ad0d37bcb273d
+
+PODFILE CHECKSUM: 11ffb0cc7281ff2a6d5e94c124df3f488aeae6d5
+
+COCOAPODS: 1.6.1

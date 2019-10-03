@@ -1,0 +1,9 @@
+use_frameworks!
+
+target 'TrustVisionAPIFramework_Example' do
+  pod 'TrustVisionAPIFramework', :path => '../'
+
+  target 'TrustVisionAPIFramework_Tests' do
+    inherit! :search_paths
+  end
+end
