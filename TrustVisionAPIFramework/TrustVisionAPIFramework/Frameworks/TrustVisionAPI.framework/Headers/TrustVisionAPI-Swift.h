@@ -190,14 +190,48 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+@class TSApiError;
+@class TVAPIClientSettingsResponse;
+@class UIImage;
+@class TVCardInfoRequest;
+@class TVAPICardInfoResponse;
+@class TVAPICompareFacesResponse;
+@class TVAPIVerifyLivenessResponse;
+@class TVAPIVerifyIdCardSanityResponse;
+@class TVAPIVerifyPortraitSanityResponse;
+@class TVRequestImage;
+@class TVCardInfoSyncRequest;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TSAPIClient")
 @interface TSAPIClient : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TSAPIClient * _Nonnull shared;)
++ (TSAPIClient * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)authorizeWithGetAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable)))getAuthorization;
+- (void)getClientSettingsWithCompletion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIClientSettingsResponse * _Nullable))completion;
+- (void)uploadImageWithImage:(UIImage * _Nonnull)image label:(NSString * _Nullable)label metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)readIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkReadIdCardInfoWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICardInfoResponse * _Nullable))completion;
+- (void)compareFacesWithImage1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nonnull)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkCompareFacesWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICompareFacesResponse * _Nullable))completion;
+- (void)verifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures imageIds:(NSArray<NSString *> * _Nonnull)imageIds completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkVerifyLivenessWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyLivenessResponse * _Nullable))completion;
+- (void)verifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nullable)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkVerifyIdCardSanityWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyIdCardSanityResponse * _Nullable))completion;
+- (void)verifyPortraitSanityWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkVerifyPortraitSanityWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyPortraitSanityResponse * _Nullable))completion;
+- (void)pollVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nullable)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyIdCardSanityResponse * _Nullable))completion;
+- (void)pollCompareFacesWithImage1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nonnull)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICompareFacesResponse * _Nullable))completion;
+- (void)pollReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICardInfoResponse * _Nullable))completion;
+- (void)pollVerifyPortraitSanityWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyPortraitSanityResponse * _Nullable))completion;
+- (void)pollVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures imageIds:(NSArray<NSString *> * _Nonnull)imageIds completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyLivenessResponse * _Nullable))completion;
+- (void)syncCompareFacesWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nonnull)image2 completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICompareFacesResponse * _Nullable))completion;
+- (void)syncReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoSyncRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICardInfoResponse * _Nullable))completion;
+- (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyIdCardSanityResponse * _Nullable))completion;
+- (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyPortraitSanityResponse * _Nullable))completion;
+- (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyLivenessResponse * _Nullable))completion;
 @end
-
-
 
 
 
@@ -212,6 +246,210 @@ SWIFT_CLASS("_TtC14TrustVisionAPI11TSAPIClient")
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI10TSApiError")
+@interface TSApiError : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI9TVAPIBase")
+@interface TVAPIBase : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPICameraOption, closed) {
+  TVAPICameraOptionFront = 0,
+  TVAPICameraOptionBack = 1,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI21TVAPICardInfoResponse")
+@interface TVAPICardInfoResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI21TVAPICardInfoResponse9CardImage")
+@interface CardImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI21TVAPICardInfoResponse3Ocr")
+@interface Ocr : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI21TVAPICardInfoResponse4Info")
+@interface Info : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI27TVAPIClientSettingsResponse")
+@interface TVAPIClientSettingsResponse : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, Orientation, closed) {
+  OrientationHorizontal = 0,
+  OrientationVertical = 1,
+};
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI27TVAPIClientSettingsResponse8Settings")
+@interface Settings : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI27TVAPIClientSettingsResponse8CardType")
+@interface CardType : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI25TVAPICompareFacesResponse")
+@interface TVAPICompareFacesResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse11CompareFace")
+@interface CompareFace : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TSCompareFaceResult, closed) {
+  TSCompareFaceResultMatched = 0,
+  TSCompareFaceResultUnmatched = 1,
+  TSCompareFaceResultUnsure = 2,
+};
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse5Image")
+@interface Image : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse4Face")
+@interface Face : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse11BoundingBox")
+@interface BoundingBox : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI18TVAPIImageResponse")
+@interface TVAPIImageResponse : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI18TVAPIImageResponse7CardBox")
+@interface CardBox : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPILivenessOption, closed) {
+  TVAPILivenessOptionActive = 0,
+  TVAPILivenessOptionPassive = 1,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI10TVAPIPoint")
+@interface TVAPIPoint : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI7TVAPIQR")
+@interface TVAPIQR : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPIQRType, closed) {
+  TVAPIQRTypeQrCode = 0,
+  TVAPIQRTypeBarCode = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, TVAPIResult, closed) {
+  TVAPIResultSuccess = 0,
+  TVAPIResultFailure = 1,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPISanity")
+@interface TVAPISanity : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPIScanQrMode, closed) {
+  TVAPIScanQrModeNone = 0,
+  TVAPIScanQrModeSeparateStep = 1,
+  TVAPIScanQrModeWithCard = 2,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI31TVAPIVerifyIdCardSanityResponse")
+@interface TVAPIVerifyIdCardSanityResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI27TVAPIVerifyLivenessResponse")
+@interface TVAPIVerifyLivenessResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI33TVAPIVerifyPortraitSanityResponse")
+@interface TVAPIVerifyPortraitSanityResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI17TVCardInfoRequest")
+@interface TVCardInfoRequest : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI21TVCardInfoSyncRequest")
+@interface TVCardInfoSyncRequest : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI14TVRequestImage")
+@interface TVRequestImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 
@@ -411,14 +649,48 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+@class TSApiError;
+@class TVAPIClientSettingsResponse;
+@class UIImage;
+@class TVCardInfoRequest;
+@class TVAPICardInfoResponse;
+@class TVAPICompareFacesResponse;
+@class TVAPIVerifyLivenessResponse;
+@class TVAPIVerifyIdCardSanityResponse;
+@class TVAPIVerifyPortraitSanityResponse;
+@class TVRequestImage;
+@class TVCardInfoSyncRequest;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TSAPIClient")
 @interface TSAPIClient : NSObject
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TSAPIClient * _Nonnull shared;)
++ (TSAPIClient * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+- (void)authorizeWithGetAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable)))getAuthorization;
+- (void)getClientSettingsWithCompletion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIClientSettingsResponse * _Nullable))completion;
+- (void)uploadImageWithImage:(UIImage * _Nonnull)image label:(NSString * _Nullable)label metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)readIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkReadIdCardInfoWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICardInfoResponse * _Nullable))completion;
+- (void)compareFacesWithImage1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nonnull)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkCompareFacesWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICompareFacesResponse * _Nullable))completion;
+- (void)verifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures imageIds:(NSArray<NSString *> * _Nonnull)imageIds completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkVerifyLivenessWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyLivenessResponse * _Nullable))completion;
+- (void)verifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nullable)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkVerifyIdCardSanityWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyIdCardSanityResponse * _Nullable))completion;
+- (void)verifyPortraitSanityWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)checkVerifyPortraitSanityWithRId:(NSString * _Nonnull)rId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyPortraitSanityResponse * _Nullable))completion;
+- (void)pollVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nullable)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyIdCardSanityResponse * _Nullable))completion;
+- (void)pollCompareFacesWithImage1Id:(NSString * _Nonnull)image1Id image2Id:(NSString * _Nonnull)image2Id completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICompareFacesResponse * _Nullable))completion;
+- (void)pollReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICardInfoResponse * _Nullable))completion;
+- (void)pollVerifyPortraitSanityWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyPortraitSanityResponse * _Nullable))completion;
+- (void)pollVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures imageIds:(NSArray<NSString *> * _Nonnull)imageIds completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyLivenessResponse * _Nullable))completion;
+- (void)syncCompareFacesWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nonnull)image2 completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICompareFacesResponse * _Nullable))completion;
+- (void)syncReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoSyncRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPICardInfoResponse * _Nullable))completion;
+- (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyIdCardSanityResponse * _Nullable))completion;
+- (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyPortraitSanityResponse * _Nullable))completion;
+- (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TSApiError *> * _Nonnull, TVAPIVerifyLivenessResponse * _Nullable))completion;
 @end
-
-
 
 
 
@@ -433,6 +705,210 @@ SWIFT_CLASS("_TtC14TrustVisionAPI11TSAPIClient")
 
 
 
+
+
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI10TSApiError")
+@interface TSApiError : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI9TVAPIBase")
+@interface TVAPIBase : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPICameraOption, closed) {
+  TVAPICameraOptionFront = 0,
+  TVAPICameraOptionBack = 1,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI21TVAPICardInfoResponse")
+@interface TVAPICardInfoResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI21TVAPICardInfoResponse9CardImage")
+@interface CardImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI21TVAPICardInfoResponse3Ocr")
+@interface Ocr : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI21TVAPICardInfoResponse4Info")
+@interface Info : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI27TVAPIClientSettingsResponse")
+@interface TVAPIClientSettingsResponse : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, Orientation, closed) {
+  OrientationHorizontal = 0,
+  OrientationVertical = 1,
+};
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI27TVAPIClientSettingsResponse8Settings")
+@interface Settings : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI27TVAPIClientSettingsResponse8CardType")
+@interface CardType : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI25TVAPICompareFacesResponse")
+@interface TVAPICompareFacesResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse11CompareFace")
+@interface CompareFace : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TSCompareFaceResult, closed) {
+  TSCompareFaceResultMatched = 0,
+  TSCompareFaceResultUnmatched = 1,
+  TSCompareFaceResultUnsure = 2,
+};
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse5Image")
+@interface Image : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse4Face")
+@interface Face : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI25TVAPICompareFacesResponse11BoundingBox")
+@interface BoundingBox : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI18TVAPIImageResponse")
+@interface TVAPIImageResponse : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtCC14TrustVisionAPI18TVAPIImageResponse7CardBox")
+@interface CardBox : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPILivenessOption, closed) {
+  TVAPILivenessOptionActive = 0,
+  TVAPILivenessOptionPassive = 1,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI10TVAPIPoint")
+@interface TVAPIPoint : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI7TVAPIQR")
+@interface TVAPIQR : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPIQRType, closed) {
+  TVAPIQRTypeQrCode = 0,
+  TVAPIQRTypeBarCode = 1,
+};
+
+typedef SWIFT_ENUM(NSInteger, TVAPIResult, closed) {
+  TVAPIResultSuccess = 0,
+  TVAPIResultFailure = 1,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPISanity")
+@interface TVAPISanity : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, TVAPIScanQrMode, closed) {
+  TVAPIScanQrModeNone = 0,
+  TVAPIScanQrModeSeparateStep = 1,
+  TVAPIScanQrModeWithCard = 2,
+};
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI31TVAPIVerifyIdCardSanityResponse")
+@interface TVAPIVerifyIdCardSanityResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI27TVAPIVerifyLivenessResponse")
+@interface TVAPIVerifyLivenessResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI33TVAPIVerifyPortraitSanityResponse")
+@interface TVAPIVerifyPortraitSanityResponse : TVAPIBase
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI17TVCardInfoRequest")
+@interface TVCardInfoRequest : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI21TVCardInfoSyncRequest")
+@interface TVCardInfoSyncRequest : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI14TVRequestImage")
+@interface TVRequestImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
 
 
 
