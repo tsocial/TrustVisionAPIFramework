@@ -1,0 +1,546 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.1.2 (swiftlang-1100.0.278 clang-1100.0.33.9)
+// swift-module-flags: -target arm64-apple-ios11.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name TrustVisionAPI
+import AVKit
+import Foundation
+import Swift
+@_exported import TrustVisionAPI
+import UIKit
+public class TVConstants {
+  public static let apiURL: Swift.String
+  public static let bundleIdentifier: Swift.String
+  public struct Firebase {
+    public static let googleAppID: Swift.String
+    public static let gcmSenderID: Swift.String
+    public static let apiKey: Swift.String
+    public static let bundleId: Swift.String
+  }
+  @objc deinit
+}
+extension TVConstants {
+  public struct Header {
+    public static let authorization: Swift.String
+    public static let timestamp: Swift.String
+    public static let platform: Swift.String
+    public static let osVersion: Swift.String
+    public static let sdkVersion: Swift.String
+    public static let deviceModel: Swift.String
+    public static let transcationId: Swift.String
+  }
+}
+extension TVConstants {
+  public struct APIClient {
+    public static let appIDKey: Swift.String
+    public static let appKey: Swift.String
+  }
+}
+extension TVConstants {
+  public struct TSLocalizedString {
+    public static let error: Swift.String
+    public static let ok: Swift.String
+    public static let settings: Swift.String
+    public static let cancel: Swift.String
+    public static let locationDeniedError: Swift.String
+    public static let faceTooSmall: Swift.String
+    public static let faceTooLarge: Swift.String
+    public static let faceOutOfBox: Swift.String
+    public static let livenessDetectionNeutral: Swift.String
+    public static let livenessDetectionLeftEye: Swift.String
+    public static let livenessDetectionRightEye: Swift.String
+    public static let livenessDetectionOpenMouth: Swift.String
+    public static let livenessDetectionTurnLeft: Swift.String
+    public static let livenessDetectionTurnRight: Swift.String
+    public static let livenessDetectionTurnUp: Swift.String
+    public static let livenessDetectionTurnDown: Swift.String
+    public static let livenessDetectionSmiling: Swift.String
+    public static let livenessDetectionEyeClose: Swift.String
+    public static let livenessDetectionHint: Swift.String
+    public static let idDetectionHint: Swift.String
+    public static let livenessDetectionFailed: Swift.String
+    public static let verifiedMatched: Swift.String
+    public static let verifiedNotMatched: Swift.String
+    public static let notRecognizeFace: Swift.String
+    public static let notRecognizeID: Swift.String
+    public static let missingCameraPermission: Swift.String
+    public static let setupCameraFailed: Swift.String
+    public static let apiErrorApiIPUnknown: Swift.String
+    public static let apiErrorLoginMissing: Swift.String
+    public static let apiErrorLoginFailed: Swift.String
+    public static let apiErrorRequestIdUnknown: Swift.String
+    public static let apiErrorRequestFormatError: Swift.String
+    public static let apiErrorBase64Missing: Swift.String
+    public static let apiErrorBase64Max: Swift.String
+    public static let apiErrorInvalidFace: Swift.String
+    public static let apiErrorDecodeIdError: Swift.String
+    public static let apiErrorDecodeSelfieError: Swift.String
+    public static let apiErrorInternalServer: Swift.String
+    public static let apiErrorInternetError: Swift.String
+  }
+}
+public enum TVNetworkEnvironment {
+  case dev
+  case production
+  case staging
+  public static func == (a: TrustVisionAPI.TVNetworkEnvironment, b: TrustVisionAPI.TVNetworkEnvironment) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc public class TVAPIClient : ObjectiveC.NSObject, TrustVisionAPI.TSApiClientProtocol {
+  @objc public static let shared: TrustVisionAPI.TVAPIClient
+  @objc public func authorize(getAuthorization: @escaping TrustVisionAPI.GetAuthorization)
+  @objc public func getClientSettings(completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVClientSettingsResponse?) -> ())
+  @objc public func uploadImage(image: UIKit.UIImage, label: Swift.String?, metadata: [Swift.String : Swift.String]?, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func readIdCardInfo(readIdCardInfoRequest: TrustVisionAPI.TVCardInfoRequest, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func checkReadIdCardInfo(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCardInfoResponse?) -> ())
+  @objc public func compareFaces(image1Id: Swift.String, image2Id: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func checkCompareFaces(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCompareFacesResponse?) -> ())
+  @objc public func verifyLiveness(gestures: [Swift.String], imageIds: [Swift.String], completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func checkVerifyLiveness(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyLivenessResponse?) -> ())
+  @objc public func verifyIdCardSanity(cardType: Swift.String, image1Id: Swift.String, image2Id: Swift.String?, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func checkVerifyIdCardSanity(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyIdCardSanityResponse?) -> ())
+  @objc public func verifyPortraitSanity(imageId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func checkVerifyPortraitSanity(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyPortraitSanityResponse?) -> ())
+  @objc public func pollVerifyIdCardSanity(cardType: Swift.String, image1Id: Swift.String, image2Id: Swift.String?, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyIdCardSanityResponse?) -> ())
+  @objc public func pollCompareFaces(image1Id: Swift.String, image2Id: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCompareFacesResponse?) -> ())
+  @objc public func pollReadIdCardInfo(readIdCardInfoRequest: TrustVisionAPI.TVCardInfoRequest, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCardInfoResponse?) -> ())
+  @objc public func pollVerifyPortraitSanity(imageId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyPortraitSanityResponse?) -> ())
+  @objc public func pollVerifyLiveness(gestures: [Swift.String], imageIds: [Swift.String], completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyLivenessResponse?) -> ())
+  @objc public func syncCompareFaces(image1: TrustVisionAPI.TVRequestImage, image2: TrustVisionAPI.TVRequestImage, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCompareFacesResponse?) -> ())
+  @objc public func syncReadIdCardInfo(readIdCardInfoRequest: TrustVisionAPI.TVCardInfoSyncRequest, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCardInfoResponse?) -> ())
+  @objc public func syncVerifyIdCardSanity(cardType: Swift.String, image1: TrustVisionAPI.TVRequestImage, image2: TrustVisionAPI.TVRequestImage?, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyIdCardSanityResponse?) -> ())
+  @objc public func syncVerifyPortraitSanity(image: TrustVisionAPI.TVRequestImage, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyPortraitSanityResponse?) -> ())
+  @objc public func syncVerifyLiveness(gestures: [Swift.String], images: [TrustVisionAPI.TVRequestImage], completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyLivenessResponse?) -> ())
+  @objc public func createTransaction(referenceId: Swift.String?, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  @objc public func setTransactionId(_ transactionId: Swift.String?)
+  @objc public func getImage(imageId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], UIKit.UIImage?) -> ())
+  @objc deinit
+}
+extension TVAPIClient : Foundation.URLSessionDelegate {
+  @objc dynamic public func urlSession(_ session: Foundation.URLSession, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
+}
+public typealias GetAuthorizationCallback = (Swift.String?, Swift.String?, Swift.String?) -> Swift.Void
+public typealias GetAuthorization = (Swift.String?, Swift.String?, (Swift.String?, Swift.String?, Swift.String?) -> Swift.Void) -> Swift.Void
+public protocol TSApiClientProtocol {
+  func authorize(getAuthorization: @escaping TrustVisionAPI.GetAuthorization)
+  func getClientSettings(completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVClientSettingsResponse?) -> ())
+  func uploadImage(image: UIKit.UIImage, label: Swift.String?, metadata: [Swift.String : Swift.String]?, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func compareFaces(image1Id: Swift.String, image2Id: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func checkCompareFaces(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCompareFacesResponse?) -> ())
+  func pollCompareFaces(image1Id: Swift.String, image2Id: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCompareFacesResponse?) -> ())
+  func syncCompareFaces(image1: TrustVisionAPI.TVRequestImage, image2: TrustVisionAPI.TVRequestImage, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCompareFacesResponse?) -> ())
+  func readIdCardInfo(readIdCardInfoRequest: TrustVisionAPI.TVCardInfoRequest, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func checkReadIdCardInfo(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCardInfoResponse?) -> ())
+  func pollReadIdCardInfo(readIdCardInfoRequest: TrustVisionAPI.TVCardInfoRequest, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCardInfoResponse?) -> ())
+  func syncReadIdCardInfo(readIdCardInfoRequest: TrustVisionAPI.TVCardInfoSyncRequest, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVCardInfoResponse?) -> ())
+  func verifyIdCardSanity(cardType: Swift.String, image1Id: Swift.String, image2Id: Swift.String?, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func checkVerifyIdCardSanity(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyIdCardSanityResponse?) -> ())
+  func pollVerifyIdCardSanity(cardType: Swift.String, image1Id: Swift.String, image2Id: Swift.String?, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyIdCardSanityResponse?) -> ())
+  func syncVerifyIdCardSanity(cardType: Swift.String, image1: TrustVisionAPI.TVRequestImage, image2: TrustVisionAPI.TVRequestImage?, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyIdCardSanityResponse?) -> ())
+  func verifyPortraitSanity(imageId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func checkVerifyPortraitSanity(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyPortraitSanityResponse?) -> ())
+  func pollVerifyPortraitSanity(imageId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyPortraitSanityResponse?) -> ())
+  func syncVerifyPortraitSanity(image: TrustVisionAPI.TVRequestImage, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyPortraitSanityResponse?) -> ())
+  func verifyLiveness(gestures: [Swift.String], imageIds: [Swift.String], completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func checkVerifyLiveness(rId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyLivenessResponse?) -> ())
+  func pollVerifyLiveness(gestures: [Swift.String], imageIds: [Swift.String], completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyLivenessResponse?) -> ())
+  func syncVerifyLiveness(gestures: [Swift.String], images: [TrustVisionAPI.TVRequestImage], completion: @escaping ([TrustVisionAPI.TVApiError], TrustVisionAPI.TVVerifyLivenessResponse?) -> ())
+  func createTransaction(referenceId: Swift.String?, completion: @escaping ([TrustVisionAPI.TVApiError], Swift.String?) -> ())
+  func setTransactionId(_ transactionId: Swift.String?)
+  func getImage(imageId: Swift.String, completion: @escaping ([TrustVisionAPI.TVApiError], UIKit.UIImage?) -> ())
+}
+public enum TVAPIEndPointType {
+  case createTransaction(Swift.String?)
+  case getClientSettings
+  case uploadImage(UIKit.UIImage, Swift.String?, [Swift.String : Swift.String]?)
+  case readInfo(TrustVisionAPI.TVCardInfoRequest)
+  case checkReadInfoResult(Swift.String)
+  case compareFaces(Swift.String, Swift.String)
+  case checkCompareFaces(Swift.String)
+  case verifyLiveness([Swift.String], [Swift.String])
+  case checkVerifyLiveness(Swift.String)
+  case verifyIdCardSanity(Swift.String, Swift.String, Swift.String?)
+  case checkIdCardSanity(Swift.String)
+  case verifyPortraitSanity(Swift.String)
+  case checkPortraitSanity(Swift.String)
+  case syncCompareFaces(TrustVisionAPI.TVRequestImage, TrustVisionAPI.TVRequestImage)
+  case syncVerifyLiveness([Swift.String], [TrustVisionAPI.TVRequestImage])
+  case syncVerifyIdCardSanity(Swift.String, TrustVisionAPI.TVRequestImage, TrustVisionAPI.TVRequestImage?)
+  case syncVerifyPortraitSanity(TrustVisionAPI.TVRequestImage)
+  case syncReadInfo(TrustVisionAPI.TVCardInfoSyncRequest)
+  case downloadImage(Swift.String)
+}
+@objc public enum TVPollingResult : Swift.Int {
+  case processing
+  case success
+  case failure
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class TVBasePolling : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var status: TrustVisionAPI.TVPollingResult
+  @objc public var requestId: Swift.String?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+@objc public class TVCardInfoRequest : ObjectiveC.NSObject, Swift.Encodable {
+  public init(cardType: Swift.String, image1Id: Swift.String, image2Id: Swift.String?, qr1ImageIds: [Swift.String]?, qr2ImageIds: [Swift.String]?)
+  @objc override dynamic public init()
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@objc public class TVCardInfoSyncRequest : ObjectiveC.NSObject, Swift.Encodable {
+  public init(cardType: Swift.String, image1: TrustVisionAPI.TVRequestImage, image2: TrustVisionAPI.TVRequestImage?, qr1Images: [TrustVisionAPI.TVRequestImage]?, qr2Images: [TrustVisionAPI.TVRequestImage]?)
+  @objc override dynamic public init()
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+@objc public class TVPoint : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var x: Swift.Int
+  @objc public var y: Swift.Int
+  required public init(from decoder: Swift.Decoder) throws
+  public init(x: Swift.Int?, y: Swift.Int?)
+  @objc public static var zero: TrustVisionAPI.TVPoint {
+    @objc get
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class TVCardInfoResponse : TrustVisionAPI.TVBasePolling {
+  @objc public var image1: TrustVisionAPI.TVCardInfoResponse.Image?
+  @objc public var image2: TrustVisionAPI.TVCardInfoResponse.Image?
+  @objc public var cardInformation: [TrustVisionAPI.TVCardInfoResponse.Info]
+  required public init(from decoder: Swift.Decoder) throws
+  @objc public class Image : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var id: Swift.String?
+    @objc public var transformedImageId: Swift.String?
+    @objc public var qr: [TrustVisionAPI.TVCardInfoResponse.Info]
+    @objc public var ocr: [TrustVisionAPI.TVCardInfoResponse.Ocr]
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class Ocr : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var text: Swift.String?
+    @objc public var boundingBox: [TrustVisionAPI.TVPoint]
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class Info : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var field: Swift.String?
+    @objc public var value: Swift.String?
+    required public init(from decoder: Swift.Decoder) throws
+    public init(field: Swift.String?, value: Swift.String?)
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc deinit
+}
+@objc public enum TVScanQrMode : Swift.Int {
+  case none
+  case separateStep
+  case withCard
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum TVQRType : Swift.Int, Swift.Decodable, Swift.CustomStringConvertible {
+  case qrCode
+  case barCode
+  public static func fromtString(stringValue: Swift.String) -> TrustVisionAPI.TVQRType?
+  public var description: Swift.String {
+    get
+  }
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class TVQR : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var exist: Swift.Bool
+  @objc public var type: TrustVisionAPI.TVQRType
+  @objc public var widthHeightRatio: Swift.Float
+  @objc public init(exist: Swift.Bool, type: TrustVisionAPI.TVQRType, widthHeightRatio: Swift.Float)
+  required public init(from decoder: Swift.Decoder) throws
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public enum TVLivenessOption : Swift.Int, Swift.Decodable {
+  case active
+  case passive
+  public static func fromString(stringValue: Swift.String) -> TrustVisionAPI.TVLivenessOption?
+  public func toString() -> Swift.String
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public enum TVCameraOption : Swift.Int, Swift.Decodable {
+  case front
+  case back
+  case both
+  public static func fromString(stringValue: Swift.String) -> TrustVisionAPI.TVCameraOption?
+  public typealias RawValue = Swift.Int
+  public init?(rawValue: Swift.Int)
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc public class TVClientSettingsResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var country: Swift.String?
+  @objc public var cardTypes: [TrustVisionAPI.TVClientSettingsResponse.CardType]
+  @objc public var settings: TrustVisionAPI.TVClientSettingsResponse.Settings?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc public enum Orientation : Swift.Int {
+    case horizontal
+    case vertical
+    public typealias RawValue = Swift.Int
+    public init?(rawValue: Swift.Int)
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  @objc public class Settings : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var scanQrMode: TrustVisionAPI.TVScanQrMode
+    @objc public var cameraOptions: [Swift.String]
+    @objc public var livenessOptions: [Swift.String]
+    @objc public var enableMultipleFaces: Swift.Bool
+    @objc public var enableVerifyPortraitSanity: Swift.Bool
+    @objc public var enableVerifyIdSanity: Swift.Bool
+    @objc public var supportTransaction: Swift.Bool
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class CardType : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var code: Swift.String?
+    @objc public var name: Swift.String?
+    @objc public var orientation: TrustVisionAPI.TVClientSettingsResponse.Orientation
+    @objc public var hasBackSide: Swift.Bool
+    @objc public var frontQr: TrustVisionAPI.TVQR?
+    @objc public var backQr: TrustVisionAPI.TVQR?
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class TVCompareFacesResponse : TrustVisionAPI.TVBasePolling {
+  @objc public var image1: TrustVisionAPI.TVCompareFacesResponse.FaceImage?
+  @objc public var image2: TrustVisionAPI.TVCompareFacesResponse.FaceImage?
+  @objc public var compareFaces: [TrustVisionAPI.TVCompareFacesResponse.CompareFace]
+  required public init(from decoder: Swift.Decoder) throws
+  @objc public class CompareFace : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public enum TVCompareFaceResult : Swift.Int {
+      case matched
+      case unmatched
+      case unsure
+      public typealias RawValue = Swift.Int
+      public init?(rawValue: Swift.Int)
+      public var rawValue: Swift.Int {
+        get
+      }
+    }
+    @objc public var confidence: Swift.Float
+    @objc public var result: TrustVisionAPI.TVCompareFacesResponse.CompareFace.TVCompareFaceResult
+    @objc public var face1Id: Swift.String?
+    @objc public var face2Id: Swift.String?
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class FaceImage : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var id: Swift.String?
+    @objc public var transformed_image_id: Swift.String?
+    @objc public var faces: [TrustVisionAPI.TVCompareFacesResponse.Face]
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class Face : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var id: Swift.String?
+    @objc public var boundingBox: TrustVisionAPI.TVCompareFacesResponse.BoundingBox?
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc public class BoundingBox : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var top: Swift.Int
+    @objc public var right: Swift.Int
+    @objc public var bottom: Swift.Int
+    @objc public var left: Swift.Int
+    @objc public var angle: Swift.Int
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc deinit
+}
+@objc public class TVEnumParser : ObjectiveC.NSObject {
+  @objc public static func TVScanQrMode(stringValue: Swift.String) -> TrustVisionAPI.TVScanQrMode
+  @objc public static func TVQRType(stringValue: Swift.String) -> TrustVisionAPI.TVQRType
+  @objc public static func TVLivenessOption(stringValue: Swift.String) -> TrustVisionAPI.TVLivenessOption
+  @objc public static func TVCameraOption(stringValue: Swift.String) -> TrustVisionAPI.TVCameraOption
+  @objc public static func Orientation(stringValue: Swift.String) -> TrustVisionAPI.TVClientSettingsResponse.Orientation
+  @objc public static func TVCompareFaceResult(stringValue: Swift.String) -> TrustVisionAPI.TVCompareFacesResponse.CompareFace.TVCompareFaceResult
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class TVApiError : ObjectiveC.NSObject {
+  @objc public var errorCode: Swift.String {
+    get
+    }
+  @objc public var message: Swift.String? {
+    get
+    }
+  public static func networkError() -> TrustVisionAPI.TVApiError
+  public static func timeoutError() -> TrustVisionAPI.TVApiError
+  public static func internalError() -> TrustVisionAPI.TVApiError
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum TVHTTPMethod : Swift.String {
+  case get
+  case post
+  case put
+  case patch
+  case delete
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.String)
+}
+public typealias TVHTTPHeaders = [Swift.String : Swift.String]
+public enum TVHTTPTask {
+  case request
+  case requestParameters(parameters: TrustVisionAPI.TVParameters?, encoding: TrustVisionAPI.TVParameterEncoding, additionHeaders: TrustVisionAPI.TVHTTPHeaders?)
+}
+public class TVJSONParameterEncoder : TrustVisionAPI.TSParameterEncoder {
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: TrustVisionAPI.TVParameters) throws
+  @objc deinit
+}
+public class TVMultipartFormEncoder : TrustVisionAPI.TSParameterEncoder {
+  public init()
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: TrustVisionAPI.TVParameters) throws
+  @objc deinit
+}
+public typealias TVParameters = [Swift.String : Any]
+public protocol TSParameterEncoder : AnyObject {
+  func encode(urlRequest: inout Foundation.URLRequest, with parameters: TrustVisionAPI.TVParameters) throws
+}
+public enum TVParameterEncoding {
+  case urlEncoding
+  case jsonEncoding
+  case multipart(TrustVisionAPI.TVMultipartFormEncoder)
+  public func encode(urlRequest: inout Foundation.URLRequest, parameters: TrustVisionAPI.TVParameters?) throws
+}
+public enum TVNetworkError : Swift.String, Swift.Error {
+  case parametersNil
+  case encodingFailed
+  case missingURL
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc public class TVRequestImage : ObjectiveC.NSObject, Swift.Encodable {
+  public init(id: Swift.String?)
+  public init(base64: Swift.String, label: Swift.String?, metadata: [Swift.String : Swift.String]?)
+  @objc override dynamic public init()
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public typealias TVNetworkRouterCompletion = (Foundation.Data?, Foundation.URLResponse?, Swift.Error?) -> ()
+@objc public class TVTransactionResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var id: Swift.String?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc override dynamic public init()
+  @objc deinit
+}
+public class TVURLParameterEncoder : TrustVisionAPI.TSParameterEncoder {
+  public func encode(urlRequest: inout Foundation.URLRequest, with parameters: TrustVisionAPI.TVParameters) throws
+  @objc deinit
+}
+@objc public class TVImageResponse : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var id: Swift.String
+  @objc public var transformedImageId: Swift.String?
+  @objc public var cardBox: TrustVisionAPI.TVImageResponse.CardBox?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc public class CardBox : ObjectiveC.NSObject, Swift.Decodable {
+    @objc public var topLeft: TrustVisionAPI.TVPoint
+    @objc public var topRight: TrustVisionAPI.TVPoint
+    @objc public var bottomLeft: TrustVisionAPI.TVPoint
+    @objc public var bottomRight: TrustVisionAPI.TVPoint
+    required public init(from decoder: Swift.Decoder) throws
+    @objc override dynamic public init()
+    @objc deinit
+  }
+  @objc override dynamic public init()
+  @objc deinit
+}
+@objc public class TVSanity : ObjectiveC.NSObject, Swift.Decodable {
+  @objc public var verdict: Swift.String?
+  @objc public var score: Swift.Float
+  @objc override dynamic public init()
+  @objc deinit
+  required public init(from decoder: Swift.Decoder) throws
+}
+@objc public class TVVerifyIdCardSanityResponse : TrustVisionAPI.TVBasePolling {
+  @objc public var image1: TrustVisionAPI.TVImageResponse?
+  @objc public var image2: TrustVisionAPI.TVImageResponse?
+  @objc public var cardSanity: TrustVisionAPI.TVSanity?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+@objc public class TVVerifyLivenessResponse : TrustVisionAPI.TVBasePolling {
+  @objc public var isLive: Swift.Bool
+  @objc public var score: Swift.Float
+  required public init(from decoder: Swift.Decoder) throws
+  public init(isLive: Swift.Bool?, score: Swift.Float?)
+  @objc deinit
+}
+@objc public class TVVerifyPortraitSanityResponse : TrustVisionAPI.TVBasePolling {
+  @objc public var portraitSanity: TrustVisionAPI.TVSanity?
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+extension TrustVisionAPI.TVNetworkEnvironment : Swift.Equatable {}
+extension TrustVisionAPI.TVNetworkEnvironment : Swift.Hashable {}
+extension TrustVisionAPI.TVPollingResult : Swift.Hashable {}
+extension TrustVisionAPI.TVPollingResult : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVScanQrMode : Swift.Equatable {}
+extension TrustVisionAPI.TVScanQrMode : Swift.Hashable {}
+extension TrustVisionAPI.TVScanQrMode : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVQRType : Swift.Equatable {}
+extension TrustVisionAPI.TVQRType : Swift.Hashable {}
+extension TrustVisionAPI.TVQRType : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVLivenessOption : Swift.Equatable {}
+extension TrustVisionAPI.TVLivenessOption : Swift.Hashable {}
+extension TrustVisionAPI.TVLivenessOption : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVCameraOption : Swift.Equatable {}
+extension TrustVisionAPI.TVCameraOption : Swift.Hashable {}
+extension TrustVisionAPI.TVCameraOption : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVClientSettingsResponse.Orientation : Swift.Equatable {}
+extension TrustVisionAPI.TVClientSettingsResponse.Orientation : Swift.Hashable {}
+extension TrustVisionAPI.TVClientSettingsResponse.Orientation : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVCompareFacesResponse.CompareFace.TVCompareFaceResult : Swift.Equatable {}
+extension TrustVisionAPI.TVCompareFacesResponse.CompareFace.TVCompareFaceResult : Swift.Hashable {}
+extension TrustVisionAPI.TVCompareFacesResponse.CompareFace.TVCompareFaceResult : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVHTTPMethod : Swift.Equatable {}
+extension TrustVisionAPI.TVHTTPMethod : Swift.Hashable {}
+extension TrustVisionAPI.TVHTTPMethod : Swift.RawRepresentable {}
+extension TrustVisionAPI.TVNetworkError : Swift.Equatable {}
+extension TrustVisionAPI.TVNetworkError : Swift.Hashable {}
+extension TrustVisionAPI.TVNetworkError : Swift.RawRepresentable {}
