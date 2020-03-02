@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'TrustVisionAPIFramework'
-    s.version          = '1.0.4'
+    s.version          = '1.0.4 '
     s.summary          = 'TrustVision API framework'
     s.description      = 'TrustVision API framework'
     s.homepage         = 'https://github.com/vknguyen1992_trustingsocial/TrustVisionAPIFramework'
@@ -19,6 +19,6 @@ Pod::Spec.new do |s|
     
     s.swift_version = '4.2'
     s.vendored_frameworks = [
-        'TrustVisionAPIFramework/Frameworks/TrustVisionAPI.framework'
+        'TrustVisionAPIFramework/TrustVisionAPIFramework/Frameworks/TrustVisionAPI.framework'
     ]
 end
