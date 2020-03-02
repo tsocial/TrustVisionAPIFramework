@@ -19,6 +19,6 @@ Pod::Spec.new do |s|
     
     s.swift_version = '4.2'
     s.vendored_frameworks = [
-        'TrustVisionAPIFramework/TrustVisionAPIFramework/Frameworks/TrustVisionAPI.framework'
+        'TrustVisionAPIFramework/Frameworks/TrustVisionAPI.framework'
     ]
 end
