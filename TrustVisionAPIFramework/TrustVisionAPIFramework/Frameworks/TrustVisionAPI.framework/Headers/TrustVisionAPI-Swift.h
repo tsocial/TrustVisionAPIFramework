@@ -284,7 +284,7 @@ SWIFT_CLASS("_TtC14TrustVisionAPI13TVBasePolling")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-typedef SWIFT_ENUM(NSInteger, TVCameraOption, open) {
+typedef SWIFT_ENUM(NSInteger, TVCameraOption, closed) {
   TVCameraOptionFront = 0,
   TVCameraOptionBack = 1,
   TVCameraOptionBoth = 2,
@@ -357,7 +357,7 @@ SWIFT_CLASS("_TtC14TrustVisionAPI24TVClientSettingsResponse")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-typedef SWIFT_ENUM(NSInteger, Orientation, open) {
+typedef SWIFT_ENUM(NSInteger, Orientation, closed) {
   OrientationHorizontal = 0,
   OrientationVertical = 1,
 };
@@ -413,7 +413,7 @@ SWIFT_CLASS("_TtCC14TrustVisionAPI22TVCompareFacesResponse11CompareFace")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-typedef SWIFT_ENUM(NSInteger, TVCompareFaceResult, open) {
+typedef SWIFT_ENUM(NSInteger, TVCompareFaceResult, closed) {
   TVCompareFaceResultMatched = 0,
   TVCompareFaceResultUnmatched = 1,
   TVCompareFaceResultUnsure = 2,
@@ -488,7 +488,7 @@ SWIFT_CLASS("_TtCC14TrustVisionAPI15TVImageResponse7CardBox")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-typedef SWIFT_ENUM(NSInteger, TVLivenessOption, open) {
+typedef SWIFT_ENUM(NSInteger, TVLivenessOption, closed) {
   TVLivenessOptionActive = 0,
   TVLivenessOptionPassive = 1,
 };
@@ -504,7 +504,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVPoint * _N
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-typedef SWIFT_ENUM(NSInteger, TVPollingResult, open) {
+typedef SWIFT_ENUM(NSInteger, TVPollingResult, closed) {
   TVPollingResultProcessing = 0,
   TVPollingResultSuccess = 1,
   TVPollingResultFailure = 2,
@@ -521,7 +521,7 @@ SWIFT_CLASS("_TtC14TrustVisionAPI4TVQR")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
-typedef SWIFT_ENUM(NSInteger, TVQRType, open) {
+typedef SWIFT_ENUM(NSInteger, TVQRType, closed) {
   TVQRTypeQrCode = 0,
   TVQRTypeBarCode = 1,
 };
@@ -541,7 +541,7 @@ SWIFT_CLASS("_TtC14TrustVisionAPI8TVSanity")
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
-typedef SWIFT_ENUM(NSInteger, TVScanQrMode, open) {
+typedef SWIFT_ENUM(NSInteger, TVScanQrMode, closed) {
   TVScanQrModeNone = 0,
   TVScanQrModeSeparateStep = 1,
   TVScanQrModeWithCard = 2,
