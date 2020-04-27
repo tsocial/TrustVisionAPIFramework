@@ -214,6 +214,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class TVVerifyPortraitSanityResponse;
 @class TVRequestImage;
 @class TVCardInfoSyncRequest;
+@class TVDetectIdCardTamperingResponse;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPIClient")
 @interface TVAPIClient : NSObject
@@ -244,6 +245,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 - (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyIdCardSanityResponse * _Nullable))completion;
 - (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyPortraitSanityResponse * _Nullable))completion;
 - (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
+- (void)syncDetectIdCardTamperingWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVDetectIdCardTamperingResponse * _Nullable))completion;
 - (void)createTransactionWithReferenceId:(NSString * _Nullable)referenceId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
 - (void)setTransactionId:(NSString * _Nullable)transactionId;
 - (void)getImageWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, UIImage * _Nullable))completion;
@@ -373,6 +375,7 @@ SWIFT_CLASS("_TtCC14TrustVisionAPI24TVClientSettingsResponse8Settings")
 @property (nonatomic) BOOL enableVerifyPortraitSanity;
 @property (nonatomic) BOOL enableVerifyIdSanity;
 @property (nonatomic) BOOL supportTransaction;
+@property (nonatomic) BOOL enableDetectIdCardTampering;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -452,6 +455,15 @@ SWIFT_CLASS("_TtCC14TrustVisionAPI22TVCompareFacesResponse11BoundingBox")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class TVIdCardTampering;
+
+SWIFT_CLASS("_TtC14TrustVisionAPI31TVDetectIdCardTamperingResponse")
+@interface TVDetectIdCardTamperingResponse : TVBasePolling
+@property (nonatomic, strong) TVIdCardTampering * _Nullable cardTampering;
+@property (nonatomic, copy) NSString * _Nullable imageId;
+@property (nonatomic, copy) NSString * _Nullable image2Id;
+@end
+
 enum TVQRType : NSInteger;
 enum TVLivenessOption : NSInteger;
 
@@ -463,6 +475,14 @@ SWIFT_CLASS("_TtC14TrustVisionAPI12TVEnumParser")
 + (enum TVCameraOption)TVCameraOptionWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
 + (enum Orientation)OrientationWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
 + (enum TVCompareFaceResult)TVCompareFaceResultWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI17TVIdCardTampering")
+@interface TVIdCardTampering : NSObject
+@property (nonatomic, copy) NSString * _Nullable verdict;
+@property (nonatomic) float score;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
