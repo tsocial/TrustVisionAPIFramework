@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
     s.name             = 'TrustVisionAPIFramework'
-    s.version          = '1.0.11'
+    s.version          = '1.0.11-msb'
     s.summary          = 'TrustVision API framework'
     s.description      = 'TrustVision API framework'
     s.homepage         = 'https://github.com/vknguyen1992_trustingsocial/TrustVisionAPIFramework'
