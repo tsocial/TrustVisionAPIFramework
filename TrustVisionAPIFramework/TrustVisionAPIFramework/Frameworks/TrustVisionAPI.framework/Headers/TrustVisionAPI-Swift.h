@@ -223,6 +223,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class TVVerifyPortraitSanityResponse;
 @class TVRequestImage;
 @class TVCardInfoSyncRequest;
+@class TVGestureImage;
 @class TVDetectIdCardTamperingResponse;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPIClient")
@@ -253,10 +254,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 - (void)syncReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoSyncRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVCardInfoResponse * _Nullable))completion;
 - (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyIdCardSanityResponse * _Nullable))completion;
 - (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyPortraitSanityResponse * _Nullable))completion;
-- (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
+- (void)syncVerifyLivenessWithGestures:(NSArray<TVGestureImage *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
 - (void)syncDetectIdCardTamperingWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 cardType:(NSString * _Nullable)cardType level:(NSString * _Nullable)level completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVDetectIdCardTamperingResponse * _Nullable))completion;
 - (void)createTransactionWithReferenceId:(NSString * _Nullable)referenceId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)endTransactionWithTransactionId:(NSString * _Nullable)transactionId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull))completion;
 - (void)setTransactionId:(NSString * _Nullable)transactionId;
+- (NSString * _Nullable)getTransactionId SWIFT_WARN_UNUSED_RESULT;
 - (void)getImageWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, UIImage * _Nullable))completion;
 @end
 
@@ -488,6 +491,21 @@ SWIFT_CLASS("_TtC14TrustVisionAPI12TVEnumParser")
 + (enum TVCompareFaceResult)TVCompareFaceResultWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI14TVGestureImage")
+@interface TVGestureImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, GestureType, closed) {
+  GestureTypeUp = 0,
+  GestureTypeDown = 1,
+  GestureTypeLeft = 2,
+  GestureTypeRight = 3,
+  GestureTypeFrontal = 4,
+};
 
 
 SWIFT_CLASS("_TtC14TrustVisionAPI23TVIDCardTamperingDetail")
@@ -847,6 +865,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class TVVerifyPortraitSanityResponse;
 @class TVRequestImage;
 @class TVCardInfoSyncRequest;
+@class TVGestureImage;
 @class TVDetectIdCardTamperingResponse;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPIClient")
@@ -877,10 +896,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 - (void)syncReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoSyncRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVCardInfoResponse * _Nullable))completion;
 - (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyIdCardSanityResponse * _Nullable))completion;
 - (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyPortraitSanityResponse * _Nullable))completion;
-- (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
+- (void)syncVerifyLivenessWithGestures:(NSArray<TVGestureImage *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
 - (void)syncDetectIdCardTamperingWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 cardType:(NSString * _Nullable)cardType level:(NSString * _Nullable)level completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVDetectIdCardTamperingResponse * _Nullable))completion;
 - (void)createTransactionWithReferenceId:(NSString * _Nullable)referenceId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)endTransactionWithTransactionId:(NSString * _Nullable)transactionId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull))completion;
 - (void)setTransactionId:(NSString * _Nullable)transactionId;
+- (NSString * _Nullable)getTransactionId SWIFT_WARN_UNUSED_RESULT;
 - (void)getImageWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, UIImage * _Nullable))completion;
 @end
 
@@ -1112,6 +1133,21 @@ SWIFT_CLASS("_TtC14TrustVisionAPI12TVEnumParser")
 + (enum TVCompareFaceResult)TVCompareFaceResultWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI14TVGestureImage")
+@interface TVGestureImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, GestureType, closed) {
+  GestureTypeUp = 0,
+  GestureTypeDown = 1,
+  GestureTypeLeft = 2,
+  GestureTypeRight = 3,
+  GestureTypeFrontal = 4,
+};
 
 
 SWIFT_CLASS("_TtC14TrustVisionAPI23TVIDCardTamperingDetail")
@@ -1474,6 +1510,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class TVVerifyPortraitSanityResponse;
 @class TVRequestImage;
 @class TVCardInfoSyncRequest;
+@class TVGestureImage;
 @class TVDetectIdCardTamperingResponse;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPIClient")
@@ -1504,10 +1541,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 - (void)syncReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoSyncRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVCardInfoResponse * _Nullable))completion;
 - (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyIdCardSanityResponse * _Nullable))completion;
 - (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyPortraitSanityResponse * _Nullable))completion;
-- (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
+- (void)syncVerifyLivenessWithGestures:(NSArray<TVGestureImage *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
 - (void)syncDetectIdCardTamperingWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 cardType:(NSString * _Nullable)cardType level:(NSString * _Nullable)level completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVDetectIdCardTamperingResponse * _Nullable))completion;
 - (void)createTransactionWithReferenceId:(NSString * _Nullable)referenceId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)endTransactionWithTransactionId:(NSString * _Nullable)transactionId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull))completion;
 - (void)setTransactionId:(NSString * _Nullable)transactionId;
+- (NSString * _Nullable)getTransactionId SWIFT_WARN_UNUSED_RESULT;
 - (void)getImageWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, UIImage * _Nullable))completion;
 @end
 
@@ -1739,6 +1778,21 @@ SWIFT_CLASS("_TtC14TrustVisionAPI12TVEnumParser")
 + (enum TVCompareFaceResult)TVCompareFaceResultWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI14TVGestureImage")
+@interface TVGestureImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, GestureType, closed) {
+  GestureTypeUp = 0,
+  GestureTypeDown = 1,
+  GestureTypeLeft = 2,
+  GestureTypeRight = 3,
+  GestureTypeFrontal = 4,
+};
 
 
 SWIFT_CLASS("_TtC14TrustVisionAPI23TVIDCardTamperingDetail")
@@ -2098,6 +2152,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @class TVVerifyPortraitSanityResponse;
 @class TVRequestImage;
 @class TVCardInfoSyncRequest;
+@class TVGestureImage;
 @class TVDetectIdCardTamperingResponse;
 
 SWIFT_CLASS("_TtC14TrustVisionAPI11TVAPIClient")
@@ -2128,10 +2183,12 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 - (void)syncReadIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoSyncRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVCardInfoResponse * _Nullable))completion;
 - (void)syncVerifyIdCardSanityWithCardType:(NSString * _Nonnull)cardType image1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyIdCardSanityResponse * _Nullable))completion;
 - (void)syncVerifyPortraitSanityWithImage:(TVRequestImage * _Nonnull)image completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyPortraitSanityResponse * _Nullable))completion;
-- (void)syncVerifyLivenessWithGestures:(NSArray<NSString *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
+- (void)syncVerifyLivenessWithGestures:(NSArray<TVGestureImage *> * _Nonnull)gestures images:(NSArray<TVRequestImage *> * _Nonnull)images completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVVerifyLivenessResponse * _Nullable))completion;
 - (void)syncDetectIdCardTamperingWithImage1:(TVRequestImage * _Nonnull)image1 image2:(TVRequestImage * _Nullable)image2 cardType:(NSString * _Nullable)cardType level:(NSString * _Nullable)level completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVDetectIdCardTamperingResponse * _Nullable))completion;
 - (void)createTransactionWithReferenceId:(NSString * _Nullable)referenceId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
+- (void)endTransactionWithTransactionId:(NSString * _Nullable)transactionId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull))completion;
 - (void)setTransactionId:(NSString * _Nullable)transactionId;
+- (NSString * _Nullable)getTransactionId SWIFT_WARN_UNUSED_RESULT;
 - (void)getImageWithImageId:(NSString * _Nonnull)imageId completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, UIImage * _Nullable))completion;
 @end
 
@@ -2363,6 +2420,21 @@ SWIFT_CLASS("_TtC14TrustVisionAPI12TVEnumParser")
 + (enum TVCompareFaceResult)TVCompareFaceResultWithStringValue:(NSString * _Nonnull)stringValue SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
+
+SWIFT_CLASS("_TtC14TrustVisionAPI14TVGestureImage")
+@interface TVGestureImage : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+typedef SWIFT_ENUM(NSInteger, GestureType, closed) {
+  GestureTypeUp = 0,
+  GestureTypeDown = 1,
+  GestureTypeLeft = 2,
+  GestureTypeRight = 3,
+  GestureTypeFrontal = 4,
+};
 
 
 SWIFT_CLASS("_TtC14TrustVisionAPI23TVIDCardTamperingDetail")
