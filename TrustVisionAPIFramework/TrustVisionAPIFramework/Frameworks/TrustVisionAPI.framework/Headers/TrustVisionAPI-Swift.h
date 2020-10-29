@@ -211,6 +211,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+SWIFT_PROTOCOL("_TtP14TrustVisionAPI18DeviceInfoProtocol_")
+@protocol DeviceInfoProtocol
+- (NSString * _Nonnull)getPlatform SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getOSVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getDeviceModel SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 
 @class TVApiError;
 @class TVClientSettingsResponse;
@@ -232,7 +241,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 + (TVAPIClient * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
+- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl deviceInfo:(id <DeviceInfoProtocol> _Nonnull)deviceInfo getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
 - (void)getClientSettingsWithCompletion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVClientSettingsResponse * _Nullable))completion;
 - (void)uploadImageWithImage:(UIImage * _Nonnull)image label:(NSString * _Nullable)label metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
 - (void)readIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
@@ -853,6 +862,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+SWIFT_PROTOCOL("_TtP14TrustVisionAPI18DeviceInfoProtocol_")
+@protocol DeviceInfoProtocol
+- (NSString * _Nonnull)getPlatform SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getOSVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getDeviceModel SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 
 @class TVApiError;
 @class TVClientSettingsResponse;
@@ -874,7 +892,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 + (TVAPIClient * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
+- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl deviceInfo:(id <DeviceInfoProtocol> _Nonnull)deviceInfo getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
 - (void)getClientSettingsWithCompletion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVClientSettingsResponse * _Nullable))completion;
 - (void)uploadImageWithImage:(UIImage * _Nonnull)image label:(NSString * _Nullable)label metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
 - (void)readIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
@@ -1498,6 +1516,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+SWIFT_PROTOCOL("_TtP14TrustVisionAPI18DeviceInfoProtocol_")
+@protocol DeviceInfoProtocol
+- (NSString * _Nonnull)getPlatform SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getOSVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getDeviceModel SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 
 @class TVApiError;
 @class TVClientSettingsResponse;
@@ -1519,7 +1546,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 + (TVAPIClient * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
+- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl deviceInfo:(id <DeviceInfoProtocol> _Nonnull)deviceInfo getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
 - (void)getClientSettingsWithCompletion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVClientSettingsResponse * _Nullable))completion;
 - (void)uploadImageWithImage:(UIImage * _Nonnull)image label:(NSString * _Nullable)label metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
 - (void)readIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
@@ -2140,6 +2167,15 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+SWIFT_PROTOCOL("_TtP14TrustVisionAPI18DeviceInfoProtocol_")
+@protocol DeviceInfoProtocol
+- (NSString * _Nonnull)getPlatform SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getOSVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getSDKVersion SWIFT_WARN_UNUSED_RESULT;
+- (NSString * _Nonnull)getDeviceModel SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 
 @class TVApiError;
 @class TVClientSettingsResponse;
@@ -2161,7 +2197,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly, strong) TVAPIClient 
 + (TVAPIClient * _Nonnull)shared SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
+- (void)setupWithBaseUrl:(NSString * _Nullable)baseUrl deviceInfo:(id <DeviceInfoProtocol> _Nonnull)deviceInfo getAuthorization:(void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, SWIFT_NOESCAPE void (^ _Nonnull)(NSString * _Nullable, NSString * _Nullable, NSString * _Nullable)))getAuthorization;
 - (void)getClientSettingsWithCompletion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, TVClientSettingsResponse * _Nullable))completion;
 - (void)uploadImageWithImage:(UIImage * _Nonnull)image label:(NSString * _Nullable)label metadata:(NSDictionary<NSString *, NSString *> * _Nullable)metadata completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
 - (void)readIdCardInfoWithReadIdCardInfoRequest:(TVCardInfoRequest * _Nonnull)readIdCardInfoRequest completion:(void (^ _Nonnull)(NSArray<TVApiError *> * _Nonnull, NSString * _Nullable))completion;
